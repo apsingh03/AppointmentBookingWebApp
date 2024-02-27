@@ -4,5 +4,6 @@ module.exports = {
   PASSWORD: process.env.PASSWORD,
   DBNAME: process.env.DBNAME,
   dialect: process.env.dialect,
+  DBPORT: process.env.DBPORT
   
 };

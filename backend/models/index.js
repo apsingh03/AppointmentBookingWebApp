@@ -6,11 +6,11 @@ const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize(
   dbConfig.DBNAME,
   dbConfig.USER,
-
-  dbConfig.Password,
+  dbConfig.PASSWORD,
   {
-    host: dbConfig.HOST,
+    host : dbConfig.HOST,
     dialect: dbConfig.dialect,
+    port: dbConfig.DBPORT,
     operatorsAliases: false,
 
     // pool: {
@@ -29,7 +29,7 @@ sequelize
     console.log("sequelize Connected");
   })
   .catch((error) => {
-    console.log("Sequelize ", error);
+    console.log("Sequelize Error ", error);
   });
 
 const db = {};
