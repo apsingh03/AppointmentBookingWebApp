@@ -1,0 +1,32 @@
+
+step 1 - create react native project
+step 2 - just keep function and remove all code from  App.tsx;
+step 3 - mkdir src folder 
+step 4 - create file AppNavigator.js 
+            
+          -> 4.1 - go to react navigation.com
+          -> 4.2 - npm install @react-navigation/native
+          -> 4.3 - npm install react-native-screens react-native-safe-area-context
+          -> 4.4 - Modify MainActivity file inside folders 
+          -> 4.5 - set <NavigationContainer> in AppNavigator.js
+          -> 4.6 - npm install @react-navigation/native-stack
+          -> use <Stack.Navigator> nested under <NavigationContainer> in APPNAVIGATOR.js 
+          -> 4.7 went to splash screen -> welcome screen -> install from this https://reactnavigation.org/docs/drawer-navigator 
+          -> 4.8 went to bottom tabs -> https://reactnavigation.org/docs/bottom-tab-navigator
+
+
+
+
+
+#
+# react native icons and also add code on Edit android/app/build.gradle
+#
+https://www.npmjs.com/package/react-native-vector-icons
+
+
+
+
+
+
+Clear Metro bundler cache (recommended)
+npm start -- --reset-cache
