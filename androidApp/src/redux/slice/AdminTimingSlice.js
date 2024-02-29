@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const initialState = {
   data: [],
@@ -7,34 +7,34 @@ const initialState = {
   isError: false,
 };
 
-const HOSTNAME = "https://appointment-booking-backend-k1fc.onrender.com";
+const HOSTNAME = 'https://appointment-booking-backend-k1fc.onrender.com';
 
 // https://appointment-booking-backend-k1fc.onrender.com
 
 // First, create the thunk
 export const getTimingsAsync = createAsyncThunk(
-  "timing/getTiming",
+  'timing/getTiming',
   async () => {
     const response = await axios.get(`${HOSTNAME}/appointment/getAppointments`);
     return response.data;
-  }
+  },
 );
 
 // http://localhost:8000/appointment/getAppointmentUsers
 
 export const getAdminAppointmentsAsync = createAsyncThunk(
-  "timing/getAppointments",
+  'timing/getAppointments',
   async () => {
     const response = await axios.get(
-      `${HOSTNAME}/appointment/getAppointmentUsers`
+      `${HOSTNAME}/appointment/getAppointmentUsers`,
     );
     return response.data;
-  }
+  },
 );
 
 export const addTimingAsync = createAsyncThunk(
-  "timing/create",
-  async ({ time, slots }) => {
+  'timing/create',
+  async ({time, slots}) => {
     // console.log( "slice " , time , slots )
 
     const response = await axios.post(
@@ -42,18 +42,18 @@ export const addTimingAsync = createAsyncThunk(
       {
         time: time,
         slots: slots,
-      }
+      },
     );
     return response.data;
-  }
+  },
 );
 
 export const deleteTimingAsync = createAsyncThunk(
-  "timing/delete",
-  async ({ id }) => {
+  'timing/delete',
+  async ({id}) => {
     try {
       const response = await axios.delete(
-        `${HOSTNAME}/appointment/deleteAppointment/${id}`
+        `${HOSTNAME}/appointment/deleteAppointment/${id}`,
       );
 
       //   console.log("response ", response);
@@ -62,12 +62,12 @@ export const deleteTimingAsync = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 
 export const updateTimingAsync = createAsyncThunk(
-  "timing/update",
-  async ({ id, time, slots }) => {
+  'timing/update',
+  async ({id, time, slots}) => {
     try {
       const response = await axios.put(
         `${HOSTNAME}/appointment/updateAppointment/${id}`,
@@ -75,7 +75,7 @@ export const updateTimingAsync = createAsyncThunk(
           time,
           time,
           slots: slots,
-        }
+        },
       );
 
       // console.log("response ", response);
@@ -84,11 +84,11 @@ export const updateTimingAsync = createAsyncThunk(
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 );
 
 export const AdminTimingSlice = createSlice({
-  name: "AdminTimingSlice",
+  name: 'AdminTimingSlice',
   initialState,
   //   reducers: {
   //     increment: (state) => {
@@ -106,7 +106,7 @@ export const AdminTimingSlice = createSlice({
   //     },
   //   },
 
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(getTimingsAsync.pending, (state, action) => {
         state.isLoading = true;
@@ -162,9 +162,9 @@ export const AdminTimingSlice = createSlice({
       .addCase(deleteTimingAsync.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        const { id } = action.meta.arg;
+        const {id} = action.meta.arg;
 
-        const index = state.data.findIndex((data) => {
+        const index = state.data.findIndex(data => {
           return data.id === id;
         });
         state.data.splice(index, 1);
@@ -185,9 +185,9 @@ export const AdminTimingSlice = createSlice({
       .addCase(updateTimingAsync.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        const { id } = action.meta.arg;
+        const {id} = action.meta.arg;
 
-        const index = state.data.findIndex((data) => {
+        const index = state.data.findIndex(data => {
           return data.id === id;
         });
         state.data.splice(index, 1);

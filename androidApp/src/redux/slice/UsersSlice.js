@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import axios from 'axios';
+import {Alert} from 'react-native';
 
 const initialState = {
   data: [],
@@ -7,22 +8,22 @@ const initialState = {
   isError: false,
 };
 
-const HOSTNAME = "https://appointment-booking-backend-k1fc.onrender.com";
+const HOSTNAME = 'https://appointment-booking-backend-k1fc.onrender.com';
 
 // First, create the thunk
 export const getUserWithAppointmentAsync = createAsyncThunk(
-  "users/GET",
+  'users/GET',
   async () => {
     const response = await axios.get(
-      `${HOSTNAME}/user/getUserWithAppointments`
+      `${HOSTNAME}/user/getUserWithAppointments`,
     );
     return response.data;
-  }
+  },
 );
 
 export const addUserWithAppointmentIdAsync = createAsyncThunk(
-  "users/create",
-  async ({ name, email, appointment_id }) => {
+  'users/create',
+  async ({name, email, appointment_id}) => {
     const response = await axios.post(`${HOSTNAME}/user/addUsers`, {
       name: name,
       email: email,
@@ -30,11 +31,11 @@ export const addUserWithAppointmentIdAsync = createAsyncThunk(
     });
     // console.log( "slice " , name, email , appointment_id , response )
     return response.data;
-  }
+  },
 );
 
 export const UsersSlice = createSlice({
-  name: "UsersSlice",
+  name: 'UsersSlice',
   initialState,
   //   reducers: {
   //     increment: (state) => {
@@ -52,7 +53,7 @@ export const UsersSlice = createSlice({
   //     },
   //   },
 
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       .addCase(getUserWithAppointmentAsync.pending, (state, action) => {
         state.isLoading = true;
@@ -77,10 +78,12 @@ export const UsersSlice = createSlice({
         state.isLoading = false;
         // state.data = action.payload;
         // console.log( action.type )
-        if (action.type === "users/create/fulfilled") {
-          alert("Appointment Booked");
+        if (action.type === 'users/create/fulfilled') {
+          // alert("Appointment Booked");
+          // console.log("Appointment Booked");
+          Alert.alert('Booked', 'Appointment Booked');
         }
-        console.log(action.payload);
+        // console.log(action.payload);
         state.data.push(action.payload);
       })
 

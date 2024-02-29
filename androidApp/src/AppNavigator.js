@@ -14,7 +14,7 @@ import HomeScreen from './HomeScreen';
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash">
+      <Stack.Navigator initialRouteName="HomeScreen">
         <Stack.Screen
           name="Splash"
           component={splashScreen}
