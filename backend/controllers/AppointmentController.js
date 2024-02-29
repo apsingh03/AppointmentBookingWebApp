@@ -75,6 +75,21 @@ const getAppointmentUsers = async (req, res) => {
   res.status(200).send(query);
 };
 
+// patch
+const decreaseSlotById = async (req, res) => {
+  let idd = req.params.id;
+  // console.log("YES GETTING ID "  , idd);
+
+  let query = await Appointment.findByPk(idd);
+
+  if (query.slots > 0) {
+    query.slots -= 1;
+    query = await query.save();
+  }
+
+  res.status(200).send(query);
+};
+
 module.exports = {
   addAppointment,
   getAllAppointments,
@@ -82,4 +97,5 @@ module.exports = {
   updateAppointmentById,
   deleteAppointmentById,
   getAppointmentUsers,
+  decreaseSlotById,
 };

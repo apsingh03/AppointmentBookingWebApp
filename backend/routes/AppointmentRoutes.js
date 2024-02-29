@@ -183,4 +183,33 @@ router.put(
 // get appointment users
 router.get("/getAppointmentUsers", appointmentController.getAppointmentUsers);
 
+
+/**
+ * @swagger
+ * tags:
+ *   name: Appointment
+ *   description: Nested RestApis
+ * /appointment/decreaseSlot/{id}:
+ *   patch:
+ *     summary: Decrease Slot by Id
+ *     tags: [Appointment]
+ *     requestBody:
+ *       required: false
+ *       content:
+ *         application/json:
+ *     responses:
+ *       200:
+ *         description: The created.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Appointment'
+ *       500:
+ *         description: Some server error
+ *
+ */
+
+// patch appointment users
+router.patch("/decreaseSlot/:id", appointmentController.decreaseSlotById);
+
 module.exports = router;

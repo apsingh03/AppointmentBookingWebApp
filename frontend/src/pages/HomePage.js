@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { RotatingLines } from "react-loader-spinner";
-import { getTimingsAsync } from "../redux/slice/AdminTimingSlice";
+import { decreaseSlotWhileAppointmentBookingAsync, getTimingsAsync } from "../redux/slice/AdminTimingSlice";
 import { Link } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
 import {
@@ -20,7 +20,7 @@ const HomePage = () => {
   const [slotTiming, setslotTiming] = useState("");
 
   // console.log(showModal);
-  // console.log(appointmentId);
+  // console.log( "admin - " , getTimingRedux );
 
   useEffect(() => {
     dispatch(getTimingsAsync());
@@ -41,6 +41,8 @@ const HomePage = () => {
         appointment_id: appointment_id,
       })
     );
+
+    dispatch( decreaseSlotWhileAppointmentBookingAsync({id : appointment_id }))
   }
 
   return (
@@ -62,41 +64,44 @@ const HomePage = () => {
           >
             {getTimingRedux.data &&
               getTimingRedux.data.map((data) => {
-                return (
-                  <div
-                    key={data.id}
-                    className=" text-center"
-                    onClick={(e) => [
-                      setshowModal(true),
-                      setappointmentId(data.id),
-                      setslotTiming(data.time),
-                    ]}
-                    onDoubleClick={(e) => setshowModal(false)}
-                    title="Appointment Schedule"
-                    style={{
-                      borderTop: "2px solid orange",
-                      borderBottom: "2px solid orange",
-                      marginBottom: "10px",
-                      width: "100%",
-                      height: "75px",
-                      cursor: "pointer",
-                      backgroundColor: "#fff",
-                    }}
-                  >
-                    <p style={{ fontSize: "30px" }}>{data.time} </p>
-                    <p
+                if (data.slots > 0) {
+                  return (
+                    <div
+                      key={data.id}
+                      className=" text-center"
+                      onClick={(e) => [
+                        setshowModal(true),
+                        setappointmentId(data.id),
+                        setslotTiming(data.time),
+                      ]}
+                      onDoubleClick={(e) => setshowModal(false)}
+                      title="Appointment Schedule"
                       style={{
-                        color: "green",
-                        fontSize: "20px",
-                        marginTop: "-20px",
-                        fontWeight: "bold",
+                        borderTop: "2px solid orange",
+                        borderBottom: "2px solid orange",
+                        marginBottom: "10px",
+                        width: "100%",
+                        height: "75px",
+                        cursor: "pointer",
+                        backgroundColor: "#fff",
                       }}
                     >
-                      {" "}
-                      {data.slots} Available{" "}
-                    </p>
-                  </div>
-                );
+                      <p style={{ fontSize: "30px" }}>{data.time} </p>
+                      <p
+                        style={{
+                          color: "green",
+                          fontSize: "20px",
+                          marginTop: "-20px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {" "}
+                        {data.slots} Available{" "}
+                      </p>
+                    </div>
+                  );
+                }
+                
               })}
           </div>
         </div>

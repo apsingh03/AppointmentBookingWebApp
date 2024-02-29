@@ -7,7 +7,8 @@ const initialState = {
   isError: false,
 };
 
-const HOSTNAME = "https://appointment-booking-backend-k1fc.onrender.com";
+// const HOSTNAME = "https://appointment-booking-backend-k1fc.onrender.com";
+const HOSTNAME = "http://localhost:8000";
 
 // First, create the thunk
 export const getUserWithAppointmentAsync = createAsyncThunk(
@@ -75,12 +76,11 @@ export const UsersSlice = createSlice({
 
       .addCase(addUserWithAppointmentIdAsync.fulfilled, (state, action) => {
         state.isLoading = false;
-        // state.data = action.payload;
-        // console.log( action.type )
+
         if (action.type === "users/create/fulfilled") {
           alert("Appointment Booked");
         }
-        console.log(action.payload);
+        // console.log(action.payload);
         state.data.push(action.payload);
       })
 

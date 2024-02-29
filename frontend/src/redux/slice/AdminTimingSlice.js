@@ -7,9 +7,9 @@ const initialState = {
   isError: false,
 };
 
-const HOSTNAME = "https://appointment-booking-backend-k1fc.onrender.com";
+// const HOSTNAME = "https://appointment-booking-backend-k1fc.onrender.com";
+const HOSTNAME = "http://localhost:8000";
 
-// https://appointment-booking-backend-k1fc.onrender.com
 
 // First, create the thunk
 export const getTimingsAsync = createAsyncThunk(
@@ -86,6 +86,25 @@ export const updateTimingAsync = createAsyncThunk(
     }
   }
 );
+
+
+export const decreaseSlotWhileAppointmentBookingAsync = createAsyncThunk(
+  "timing/slot decrease",
+  async ({ id }) => {
+    try {
+      const response = await axios.patch(
+        `${HOSTNAME}/appointment/decreaseSlot/${id}`,
+      );
+
+      // console.log("response ", response);
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 
 export const AdminTimingSlice = createSlice({
   name: "AdminTimingSlice",
@@ -194,6 +213,28 @@ export const AdminTimingSlice = createSlice({
       })
 
       .addCase(updateTimingAsync.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+      })
+
+      
+      .addCase(decreaseSlotWhileAppointmentBookingAsync.pending, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+
+      .addCase(decreaseSlotWhileAppointmentBookingAsync.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const { id } = action.meta.arg;
+        const index = state.data.findIndex((data) => {
+          return data.id === id;
+        });
+
+        // console.log (action.payload.slots) 
+        state.data[index].slots = action.payload.slots
+      })
+
+      .addCase(decreaseSlotWhileAppointmentBookingAsync.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
       });
