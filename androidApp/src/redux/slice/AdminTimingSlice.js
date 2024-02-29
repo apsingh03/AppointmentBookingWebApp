@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
+import { Alert } from 'react-native';
 
 const initialState = {
   data: [],
@@ -146,6 +147,7 @@ export const AdminTimingSlice = createSlice({
       .addCase(addTimingAsync.fulfilled, (state, action) => {
         state.isLoading = false;
         // state.data = action.payload;
+        Alert.alert('Added', 'Time Added');
         state.data.push(action.payload);
       })
 
@@ -161,7 +163,7 @@ export const AdminTimingSlice = createSlice({
 
       .addCase(deleteTimingAsync.fulfilled, (state, action) => {
         state.isLoading = false;
-
+        Alert.alert('Deleted', 'Entry Deleted');
         const {id} = action.meta.arg;
 
         const index = state.data.findIndex(data => {

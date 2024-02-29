@@ -43,6 +43,7 @@ const HomeTab = () => {
           backgroundColor: '#212529',
           padding: 10,
         }}>
+          
         <View
           style={{
             display: 'flex',
@@ -160,6 +161,8 @@ const HomeTab = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
+
+        
       </View>
 
       <BottomPopUp
