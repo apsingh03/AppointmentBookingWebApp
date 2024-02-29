@@ -9,15 +9,13 @@ import HomeTab from './screen/BottomTabs/HomeTab';
 import SecondTab from './screen/BottomTabs/SecondTab';
 import ThirdTab from './screen/BottomTabs/ThirdTab';
 
-
 // icons
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const HomeScreen = () => {
   return (
-    <BottomTab.Navigator initialRouteName="ThirdTab">
-
+    <BottomTab.Navigator initialRouteName="HomeTab">
       <BottomTab.Screen
         name="HomeTab"
         component={HomeTab}
@@ -46,8 +44,7 @@ const HomeScreen = () => {
         }}
       />
 
-      
-<BottomTab.Screen
+      <BottomTab.Screen
         name="ThirdTab"
         component={ThirdTab}
         options={{
@@ -62,8 +59,6 @@ const HomeScreen = () => {
           ),
         }}
       />
-
-
     </BottomTab.Navigator>
   );
 };

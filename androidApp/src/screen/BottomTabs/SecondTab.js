@@ -30,16 +30,29 @@ import {useSelector, useDispatch} from 'react-redux';
 const SecondTab = () => {
   const dispatch = useDispatch();
   const [selectTiming, setselectTiming] = useState(null);
-
+  const [typeSlots, settypeSlots] = useState(null);
   const getTimingRedux = useSelector(state => state.adminTiming);
 
   useEffect(() => {
     dispatch(getTimingsAsync());
   }, []);
 
+  let formikInitialValues = {
+    slots: '',
+  };
+
   const validationSchema = Yup.object().shape({
     slots: Yup.number().min(1, 'Greater than > 2 !').required('Qty Required'),
   });
+
+  function onEditFunc(id, time, slots) {
+    // console.log("Edit ID - " , id, time, slots  )
+
+    // document.querySelector("#selectTimeZone").value = time;
+    // document.querySelector("#slots").value = slots;
+    settypeSlots(slots);
+    // dispatch(deleteTimingAsync({ id: id }));
+  }
 
   return (
     <View style={styles.parent}>
@@ -50,7 +63,7 @@ const SecondTab = () => {
           padding: 10,
         }}>
         <Formik
-          initialValues={{slots: ''}}
+          initialValues={formikInitialValues}
           validationSchema={validationSchema}
           onSubmit={values => {
             if (selectTiming === null) {
@@ -182,7 +195,7 @@ const SecondTab = () => {
 
       <View
         style={{
-          height: windowHeight,
+          height: windowHeight / 1.8,
           backgroundColor: '#212529',
           padding: 10,
           marginTop: 10,
@@ -190,24 +203,28 @@ const SecondTab = () => {
         <View>
           <View
             style={{
-              backgroundColor: '#fff',
+              backgroundColor: 'orange',
               padding: 10,
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}>
             {/* s.no time slot action */}
-            <Text style={{color: '#000', fontSize: 15, fontWeight: 'bold'}}>
+            <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
               S.No
             </Text>
-            <Text style={{color: '#000', fontSize: 15, fontWeight: 'bold'}}>
+            <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
               Time
             </Text>
-            <Text style={{color: '#000', fontSize: 15, fontWeight: 'bold'}}>
+            <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
               Slot
             </Text>
-            <Text style={{color: '#000', fontSize: 15, fontWeight: 'bold'}}>
-              Action
+
+            <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
+              Edit
+            </Text>
+            <Text style={{color: '#fff', fontSize: 15, fontWeight: 'bold'}}>
+              Delete
             </Text>
           </View>
 
@@ -239,10 +256,35 @@ const SecondTab = () => {
                       {' '}
                       {item.slots}{' '}
                     </Text>
-                    <Text
+
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text>
+                        {' '}
+                        <Button
+                          onPress={() =>
+                            onEditFunc(item.id, item.time, item.slots)
+                          }
+                          title="Edit"></Button>{' '}
+                      </Text>
+                      <Text>
+                        {' '}
+                        <Button
+                          onPress={() =>
+                            dispatch(deleteTimingAsync({id: item.id}))
+                          }
+                          title="Delete"
+                          color="red"></Button>{' '}
+                      </Text>
+                    </View>
+                    {/* <Text
                       style={{color: '#000', fontSize: 15, fontWeight: 'bold'}}>
                       Action
-                    </Text>
+                    </Text> */}
                   </View>
                 </>
               );

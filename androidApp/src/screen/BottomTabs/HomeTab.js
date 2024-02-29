@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator} from 'react-native-paper';
+import {ActivityIndicator, TouchableRipple} from 'react-native-paper';
 // redux
 import {useSelector, useDispatch} from 'react-redux';
 import {getTimingsAsync} from '../../redux/slice/AdminTimingSlice';
@@ -43,7 +43,6 @@ const HomeTab = () => {
           backgroundColor: '#212529',
           padding: 10,
         }}>
-          
         <View
           style={{
             display: 'flex',
@@ -161,8 +160,6 @@ const HomeTab = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
-
-        
       </View>
 
       <BottomPopUp
