@@ -15,25 +15,13 @@ const addUser = async (req, res) => {
     appointment_id: req.body.appointment_id,
   };
   let query = await Users.create(data);
-  // let decreaseSlots = await Appointment.update(
-  //     slots = slots - 1  ,
-  //     {
-  //     where : {id : req.body.appointment_id }}
-  // )
-
-  // decreaseSlots.slots =  decreaseSlots.slots - 1;
-
-  // console.log( "decreaseSlots - " , decreaseSlots.slots )
-
   res.status(200).send(query);
 };
 
 // GET all users
 
 const getAllUsers = async (req, res) => {
-  // console.log("------------------------------------")
   let query = await Users.findAll({});
-  // console.log("-----> " , query )
   res.status(200).send(query);
 };
 
@@ -45,6 +33,7 @@ const getUserWithAppointments = async (req, res) => {
         as: "appointment",
       },
     ],
+    order: [["id", "DESC"]], // Sorting by id in descending order
   });
 
   res.status(200).send(query);
