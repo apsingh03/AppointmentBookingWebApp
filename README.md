@@ -35,5 +35,6 @@
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/apsingh03/)
 
 ## 🚀 About Me
-I'm a well skilled and motivated Full Stack Developer with expertise in HTML, CSS, Bootstrap, JavaScript, React.js, React Native ,Swagger. I am proficient in crafting responsive web designs. On the backend, I have expertise in NodeJS and ExpressJS for building robust Rest APIs . My knowledge extends to Hybrid mobile app development using React Native, and I can efficiently handle MySQL databases for seamless data management. With a passion for problem-solving and a keen eye for detail I am looking for growth opportunities in my development career
+I am MERN stack & React Native developer proficient in HTML, CSS, JS, React, Redux Toolkit, Node.js, Express.js, MySQL, & Axios. Skilled in crafting web and cross-platform mobile applications using React Native with a focus on responsive design, user experience, and efficient data management. Passionate about problem-solving and pushing boundaries in software development.
+
 
