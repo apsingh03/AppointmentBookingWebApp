@@ -7,8 +7,8 @@ const initialState = {
   isError: false,
 };
 
-// const HOSTNAME = "https://appointment-booking-backend-k1fc.onrender.com";
-const HOSTNAME = "http://localhost:8000";
+const HOSTNAME = "https://appointment-booking-backend-k1fc.onrender.com";
+// const HOSTNAME = "http://localhost:8000";
 
 // First, create the thunk
 export const getUserWithAppointmentAsync = createAsyncThunk(
