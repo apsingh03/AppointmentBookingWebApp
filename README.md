@@ -12,6 +12,18 @@
 - Every time when user book appointment slots decreases by 1
 - Admin can read all users booked appointments 
 - Responsive Design
+
+## Screenshot 
+<div style="display: flex; gap: 30px;">
+
+ <img src="https://raw.githubusercontent.com/apsingh03/AppointmentBookingWebApp/master/screenshots/appointmentwebapp.png" alt="Screenshot 1" height="200" title="Appointment Booking Dashboard" />
+
+ <img src="https://raw.githubusercontent.com/apsingh03/AppointmentBookingWebApp/master/screenshots/addTiming.png" alt="Screenshot 1" height="200" title="Add Timing Slots Page" />
+
+  <img src="https://raw.githubusercontent.com/apsingh03/AppointmentBookingWebApp/master/screenshots/backend.png" alt="Screenshot 1" height="200" title="REST APIS documented with Swagger" />
+ 
+</div>
+
 #### Front End Deployed Link -  [Click Here to Check FrontEnd](https://appointment-bookingapp.netlify.app/)
 
 ##### HTML , CSS , Bootstrap , Javascript , React JS , React Router, Redux Toolkit , Redux Thunk , Axios
